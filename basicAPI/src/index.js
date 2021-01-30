@@ -3,6 +3,7 @@ const express = require('express')
 const fs = require('fs')
 const { v4: uuid } = require('uuid')
 const app = express()
+const cors = require('cors')
 
 var listOfstudies = JSON.parse(fs.readFileSync(path.join(__dirname,'studies.json')))
 
@@ -13,6 +14,7 @@ function myMiddlewareValidate(req,res,next){
 
 // To read JSON from the body
 app.use(express.json())
+app.use(cors())
 app.use(myMiddlewareValidate)
 
 app.get('/studies',(req,res)=>{
@@ -26,7 +28,7 @@ app.post('/studies',(req,res)=>{
     const { tech, status } = req.body
     const study = {id: uuid(), tech, status}
     listOfstudies.push(study)
-    fs.writeFileSync('D:/studyBase/basicAPI/src/studies.json', JSON.stringify(listOfstudies))
+    fs.writeFileSync(path.join(__dirname,'studies.json'), JSON.stringify(listOfstudies))
     return res.json(study)
 })
 
@@ -41,7 +43,7 @@ app.put('/studies/:id',(req,res)=>{
 
     const study = {tech, status, id}
     listOfstudies[studyIndex] = study
-    fs.writeFileSync('D:/studyBase/basicAPI/src/studies.json', JSON.stringify(listOfstudies))
+    fs.writeFileSync(path.join(__dirname,'studies.json'), JSON.stringify(listOfstudies))
     return res.json(listOfstudies[studyIndex])
 })
 
@@ -54,7 +56,7 @@ app.delete('/studies/:id',(req,res)=>{
     }
     
     listOfstudies.splice(studyIndex, 1)
-    fs.writeFileSync('D:/studyBase/basicAPI/src/studies.json', JSON.stringify(listOfstudies))
+    fs.writeFileSync(path.join(__dirname,'studies.json'), JSON.stringify(listOfstudies))
     return res.json({"Delete":"OK"})
 })
 
