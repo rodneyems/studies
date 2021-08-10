@@ -12,5 +12,13 @@ select * from tabela_de_produtos where SABOR in ('Laranja', 'Manga');
 
 select * from tabela_de_produtos where sabor like '%Maça%';
 select * from tabela_de_produtos where sabor like 'Ma%';
-
 select * from tabela_de_clientes where NOME like '%Mattos';
+
+select distinct EMBALAGEM, TAMANHO FROM tabela_de_produtos; 
+select distinct EMBALAGEM, TAMANHO, SABOR FROM tabela_de_produtos where SABOR = 'Laranja'; 
+select distinct EMBALAGEM, TAMANHO, SABOR FROM tabela_de_produtos;
+select distinct SABOR as Lista_de_sabores FROM tabela_de_produtos;
+select EMBALAGEM, TAMANHO, SABOR FROM tabela_de_produtos; 
+
+select distinct BAIRRO, CIDADE from tabela_de_clientes where CIDADE = 'Rio de Janeiro';
+select BAIRRO, CIDADE from tabela_de_clientes where CIDADE = 'Rio de Janeiro';
