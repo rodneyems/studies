@@ -1,0 +1,17 @@
+select * from tbproduto;
+select * from tabela_de_vendedores;
+select * from tbcliente;
+select CPF, NOME from tbcliente;
+select CPF AS CPF_CLIENTE, NOME AS NOME_CLIENTE from tbcliente;
+select * from tbcliente where ESTADO = 'SP';
+select * from tabela_de_vendedores where NOME = 'Claudia Morais';
+select * from tbcliente where IDADE > 22;
+select * from tbcliente where IDADE <= 22;
+select * from tbcliente where IDADE <> 22;
+select * from tbproduto where PRECO_LISTA between 16.007 and 16.009;
+select * from tabela_de_vendedores where PERCENTUAL_DE_COMISSAO > 10;
+select * from tbcliente where year(DATA_NASCIMENTO) = 1995;
+select * from tbcliente where month(DATA_NASCIMENTO) = 06;
+select * from tabela_de_vendedores where year(DATA_ADMISSÃO) >= 2016;
+select * from tbcliente;
+select * from tbcliente where IDADE >= 20 and SEXO = 'M' and IDADE <= 30;
