@@ -61,5 +61,5 @@ app.delete('/studies/:id',(req,res)=>{
 })
 
 app.listen(5000,()=>{
-    console.log("Server is Running on port 5000")
+    console.log("Server is Running on port 5000 TESTE REBASE")
 })
