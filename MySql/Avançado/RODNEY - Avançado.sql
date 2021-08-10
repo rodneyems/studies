@@ -24,5 +24,12 @@ select distinct BAIRRO, CIDADE from tabela_de_clientes where CIDADE = 'Rio de Ja
 select BAIRRO, CIDADE from tabela_de_clientes where CIDADE = 'Rio de Janeiro';
 
 select * from tabela_de_produtos limit 2,3;
-
 select * from notas_fiscais where DATA_VENDA = '2017/01/01' limit 10;
+
+select * from tabela_de_produtos order by PRECO_DE_LISTA;
+select * from tabela_de_produtos order by PRECO_DE_LISTA DESC;
+select * from tabela_de_produtos order by EMBALAGEM, TAMANHO DESC;
+select * from tabela_de_produtos where SABOR = 'Manga' order by EMBALAGEM ASC, TAMANHO DESC;
+
+select * from tabela_de_produtos where NOME_DO_PRODUTO = 'Linha Refrescante - 1 Litro - Morango/Limão';
+select * from itens_notas_fiscais where CODIGO_DO_PRODUTO = '1101035' ORDER BY QUANTIDADE DESC;
