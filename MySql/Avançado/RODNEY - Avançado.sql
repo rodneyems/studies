@@ -22,3 +22,7 @@ select EMBALAGEM, TAMANHO, SABOR FROM tabela_de_produtos;
 
 select distinct BAIRRO, CIDADE from tabela_de_clientes where CIDADE = 'Rio de Janeiro';
 select BAIRRO, CIDADE from tabela_de_clientes where CIDADE = 'Rio de Janeiro';
+
+select * from tabela_de_produtos limit 2,3;
+
+select * from notas_fiscais where DATA_VENDA = '2017/01/01' limit 10;
