@@ -33,3 +33,18 @@ select * from tabela_de_produtos where SABOR = 'Manga' order by EMBALAGEM ASC, T
 
 select * from tabela_de_produtos where NOME_DO_PRODUTO = 'Linha Refrescante - 1 Litro - Morango/Limão';
 select * from itens_notas_fiscais where CODIGO_DO_PRODUTO = '1101035' ORDER BY QUANTIDADE DESC;
+
+select EMBALAGEM, SUM(PRECO_DE_LISTA) AS SOMA_DOS_VALORES from tabela_de_produtos GROUP BY EMBALAGEM;
+select EMBALAGEM, MAX(PRECO_DE_LISTA) AS MAIOR_PRECO from tabela_de_produtos GROUP BY EMBALAGEM;
+select EMBALAGEM, MIN(PRECO_DE_LISTA) AS MENOR_PRECO from tabela_de_produtos GROUP BY EMBALAGEM;
+select EMBALAGEM, AVG(PRECO_DE_LISTA) AS MENOR_PRECO from tabela_de_produtos GROUP BY EMBALAGEM;
+select EMBALAGEM, COUNT(*) AS QUANTIDADE_ITENS from tabela_de_produtos GROUP BY EMBALAGEM;
+
+select ESTADO, BAIRRO, SUM(LIMITE_DE_CREDITO) as LIMITE_TOTAL from tabela_de_clientes
+WHERE CIDADE in ('Rio de Janeiro', 'Sao paulo')
+GROUP BY ESTADO, BAIRRO
+ORDER BY LIMITE_DE_CREDITO DESC;
+
+select CODIGO_DO_PRODUTO, MAX(QUANTIDADE) AS MAIOR_PEDIDO from itens_notas_fiscais where CODIGO_DO_PRODUTO = '1101035' GROUP BY CODIGO_DO_PRODUTO;
+select CODIGO_DO_PRODUTO, COUNT(*) from itens_notas_fiscais where CODIGO_DO_PRODUTO = '1101035' and QUANTIDADE = 99 GROUP BY CODIGO_DO_PRODUTO; 
+
