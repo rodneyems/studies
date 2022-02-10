@@ -10,28 +10,38 @@ import {
 import {Button} from '../components/Button';
 import {SkillCard} from '../components/SkillCard';
 
+export interface SkillData {
+  skill: String;
+}
+interface Greatting {
+  greatting: String;
+}
+
 export default function Home() {
   const [newSkill, setNewSkill] = useState('');
-  const [mySkills, setMySkills] = useState([]);
-  const [greatting, setGreetting] = useState([]);
+  const [mySkills, setMySkills] = useState<SkillData[]>([]);
+  const [greatting, setGreetting] = useState<Greatting>({greatting : ''});
 
   function handleAddNewSkill() {
-    setMySkills(oldState => [...oldState, newSkill]);
+    const data = {
+      skill: newSkill,
+    };
+    setMySkills(oldState => [...oldState, data]);
   }
   useEffect(() => {
     const currentHour = new Date().getHours();
     if (currentHour < 12) {
-      setGreetting('Good morning');
+      setGreetting({greatting : 'Good Morning'});
     } else if (currentHour >= 12 && currentHour < 18) {
-      setGreetting('Good Afternoon');
+      setGreetting({greatting : 'Good Afternoon'});
     } else {
-      setGreetting('Good night');
+      setGreetting({greatting : 'Good Night'});
     }
   }, []);
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Welcome Rodney!</Text>
-      <Text style={styles.greatting}>{greatting}</Text>
+      <Text style={styles.greatting}>{greatting.greatting}</Text>
       <TextInput
         style={styles.input}
         placeholder="Type your skill"
