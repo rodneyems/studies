@@ -5,7 +5,7 @@ import {
   StyleSheet,
   Platform,
   TextInput,
-  ScrollView,
+  FlatList,
 } from 'react-native';
 import {Button} from './components/Button';
 import {SkillCard} from './components/SkillCard';
@@ -26,11 +26,10 @@ export default function Home() {
         onChangeText={setNewSkill}
       />
       <Button onPress={handleAddNewSkill} />
-      <ScrollView>
-        {mySkills.map((skill, i) => (
-          <SkillCard key={i} skill={skill} index={i} />
-        ))}
-      </ScrollView>
+      <FlatList
+        data={mySkills}
+        renderItem={({item}) => <SkillCard skill={item} />}
+      />
     </View>
   );
 }
