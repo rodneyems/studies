@@ -48,7 +48,7 @@ export default function Home() {
         placeholderTextColor="#555"
         onChangeText={setNewSkill}
       />
-      <Button onPress={handleAddNewSkill} />
+      <Button title={"Add"} onPress={handleAddNewSkill} />
       <FlatList
         data={mySkills}
         renderItem={({item}) => <SkillCard skill={item} />}
