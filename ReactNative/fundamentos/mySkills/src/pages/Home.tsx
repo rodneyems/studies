@@ -10,8 +10,11 @@ import {
 import {Button} from '../components/Button';
 import {SkillCard} from '../components/SkillCard';
 
+let id = 0;
+
 export interface SkillData {
-  skill: String;
+  skill: String,
+  id: Number;
 }
 interface Greatting {
   greatting: String;
@@ -25,8 +28,12 @@ export default function Home() {
   function handleAddNewSkill() {
     const data = {
       skill: newSkill,
+      id: id++
     };
     setMySkills(oldState => [...oldState, data]);
+  }
+  function handleDeleteSkill(id : Number){
+    setMySkills(oldState => oldState.filter(skill => skill.id != id));
   }
   useEffect(() => {
     const currentHour = new Date().getHours();
@@ -51,7 +58,7 @@ export default function Home() {
       <Button title={"Add"} onPress={handleAddNewSkill} />
       <FlatList
         data={mySkills}
-        renderItem={({item}) => <SkillCard skill={item} />}
+        renderItem={({item}) => <SkillCard skill={item} onPress={() => handleDeleteSkill(item.id)}/>}
       />
     </View>
   );
