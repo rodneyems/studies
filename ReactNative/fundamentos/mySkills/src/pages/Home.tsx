@@ -13,7 +13,7 @@ import {SkillCard} from '../components/SkillCard';
 let id = 0;
 
 export interface SkillData {
-  skill: String,
+  skill: String;
   id: Number;
 }
 interface Greatting {
@@ -23,26 +23,26 @@ interface Greatting {
 export default function Home() {
   const [newSkill, setNewSkill] = useState('');
   const [mySkills, setMySkills] = useState<SkillData[]>([]);
-  const [greatting, setGreetting] = useState<Greatting>({greatting : ''});
+  const [greatting, setGreetting] = useState<Greatting>({greatting: ''});
 
   function handleAddNewSkill() {
     const data = {
       skill: newSkill,
-      id: id++
+      id: id++,
     };
     setMySkills(oldState => [...oldState, data]);
   }
-  function handleDeleteSkill(id : Number){
-    setMySkills(oldState => oldState.filter(skill => skill.id != id));
+  function handleDeleteSkill(Id: Number) {
+    setMySkills(oldState => oldState.filter(skill => skill.id !== Id));
   }
   useEffect(() => {
     const currentHour = new Date().getHours();
     if (currentHour < 12) {
-      setGreetting({greatting : 'Good Morning'});
+      setGreetting({greatting: 'Good Morning'});
     } else if (currentHour >= 12 && currentHour < 18) {
-      setGreetting({greatting : 'Good Afternoon'});
+      setGreetting({greatting: 'Good Afternoon'});
     } else {
-      setGreetting({greatting : 'Good Night'});
+      setGreetting({greatting: 'Good Night'});
     }
   }, []);
   return (
@@ -55,10 +55,12 @@ export default function Home() {
         placeholderTextColor="#555"
         onChangeText={setNewSkill}
       />
-      <Button title={"Add"} onPress={handleAddNewSkill} />
+      <Button title={'Add'} onPress={handleAddNewSkill} />
       <FlatList
         data={mySkills}
-        renderItem={({item}) => <SkillCard skill={item} onPress={() => handleDeleteSkill(item.id)}/>}
+        renderItem={({item}) => (
+          <SkillCard skill={item} onPress={() => handleDeleteSkill(item.id)} />
+        )}
       />
     </View>
   );
