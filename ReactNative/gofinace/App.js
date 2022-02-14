@@ -1,6 +1,6 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components/native';
-import { Dasboard } from './src/Dashboard/Dashboard';
+import { Dasboard } from './src/screens/Dashboard/Dashboard';
 import theme from './src/global/styles/theme';
 import { 
   useFonts,
