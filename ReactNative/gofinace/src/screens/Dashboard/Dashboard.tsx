@@ -1,4 +1,5 @@
 import React from 'react';
+import { HighLightCard } from '../../componets/HighLightCard';
 import {
   Container,
   Header,
@@ -9,6 +10,7 @@ import {
   Greattings,
   UserName,
   PowerIcon,
+  HighLightCards
 } from './styles';
 
 export function Dasboard() {
@@ -26,6 +28,11 @@ export function Dasboard() {
           <PowerIcon name='power'/>
         </UserWrapper>
       </Header>
+      <HighLightCards>
+        <HighLightCard></HighLightCard>
+        <HighLightCard></HighLightCard>
+        <HighLightCard></HighLightCard>
+      </HighLightCards>
     </Container>
   );
 }

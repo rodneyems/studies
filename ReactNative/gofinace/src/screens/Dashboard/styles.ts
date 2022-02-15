@@ -11,13 +11,13 @@ export const Container = styled.View`
 
 export const Header = styled.View`
   width: 100%;
-  justify-content: center;
   align-items: center;
-  height: ${RFPercentage(42)}px;
+  height: ${RFPercentage(40)}px;
   background-color: ${({theme}) => theme.colors.primary};  
 `;
 
 export const UserWrapper = styled.View`
+  margin-top: ${RFPercentage(8)}px;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
@@ -57,3 +57,14 @@ export const PowerIcon = styled(Feather)`
   color: ${({theme}) => theme.colors.secondary};
   font-size: ${RFValue(24)}px;
 `
+
+export const HighLightCards = styled.ScrollView.attrs({
+  horizontal: true,
+  showsHorizontalScrollIndicator: false,
+  contentContainerStyle: {paddingHorizontal: 24}
+})`
+  width: 100%;
+  position: absolute;
+
+  margin-top: ${RFPercentage(20)}px;
+`;
