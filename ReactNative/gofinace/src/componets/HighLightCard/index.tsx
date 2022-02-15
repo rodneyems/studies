@@ -1,5 +1,6 @@
-import React from "react";
-import { 
+import React from 'react';
+import theme from '../../global/styles/theme';
+import {
   Container,
   Header,
   Title,
@@ -7,20 +8,32 @@ import {
   Footer,
   Amount,
   LastTransaction,
-} from "./styles"; 
+} from './styles';
 
-export function HighLightCard(){
-  return(
-    <Container>
+interface Props {
+  type: 'up' | 'down' | 'total';
+  title: string;
+  amount: string;
+  lastTransaction: string;
+}
+const icon = {
+  up: 'arrow-up-circle',
+  down: 'arrow-down-circle',
+  total: 'dollar-sign',
+};
+
+export function HighLightCard({ type, title, amount, lastTransaction }: Props) {
+  return (
+    <Container type={type}>
       <Header>
-        <Title>Entrada</Title>
-        <Icon name='arrow-up-circle' />
+        <Title type={type}>{title}</Title>
+        <Icon name={icon[type]} type={type} />
       </Header>
 
       <Footer>
-        <Amount>R$: 20.000,00</Amount>
-        <LastTransaction>Última entrada dia 14 de Fevereiro</LastTransaction>
+        <Amount type={type}>{amount}</Amount>
+        <LastTransaction type={type}>{lastTransaction}</LastTransaction>
       </Footer>
     </Container>
-  )
+  );
 }

@@ -10,7 +10,7 @@ import {
   Greattings,
   UserName,
   PowerIcon,
-  HighLightCards
+  HighLightCards,
 } from './styles';
 
 export function Dasboard() {
@@ -25,13 +25,28 @@ export function Dasboard() {
               <UserName>Rodney</UserName>
             </User>
           </UserInfo>
-          <PowerIcon name='power'/>
+          <PowerIcon name='power' />
         </UserWrapper>
       </Header>
       <HighLightCards>
-        <HighLightCard></HighLightCard>
-        <HighLightCard></HighLightCard>
-        <HighLightCard></HighLightCard>
+        <HighLightCard
+          type='up'
+          title='Entrada'
+          amount='R$ 50.000,00'
+          lastTransaction='Última transação realizada dia 15/02/2022'
+        />
+        <HighLightCard
+          type='down'
+          title='Saída'
+          amount='R$ 19.000,00'
+          lastTransaction='Última transação realizada dia 15/02/2022'
+        />
+        <HighLightCard
+          type='total'
+          title='Resumo'
+          amount='R$ 20.000,00'
+          lastTransaction='Última transação realizada dia 15/02/2022'
+        />
       </HighLightCards>
     </Container>
   );
