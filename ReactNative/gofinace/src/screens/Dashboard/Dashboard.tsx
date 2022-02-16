@@ -1,5 +1,6 @@
 import React from 'react';
 import { HighLightCard } from '../../componets/HighLightCard';
+import { Transaction } from '../../componets/Transaction';
 import {
   Container,
   Header,
@@ -11,6 +12,8 @@ import {
   UserName,
   PowerIcon,
   HighLightCards,
+  Transactions,
+  Title,
 } from './styles';
 
 export function Dasboard() {
@@ -48,6 +51,16 @@ export function Dasboard() {
           lastTransaction='Última transação realizada dia 15/02/2022'
         />
       </HighLightCards>
+      <Transactions>
+        <Title>Listagem</Title>
+
+        <Transaction
+          amount='R$ 20.000,00'
+          categoryName={{ icon: 'dollar-sign', name: 'Vendas' }}
+          date='10/10/10'
+          title='Desenvolvimento do site'
+        ></Transaction>
+      </Transactions>
     </Container>
   );
 }

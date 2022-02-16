@@ -5,7 +5,6 @@ import { Feather } from '@expo/vector-icons';
 
 export const Container = styled.View`
     flex: 1;
-    align-items: center;
     background-color: ${({theme}) => theme.colors.background };
 `;
 
@@ -68,3 +67,16 @@ export const HighLightCards = styled.ScrollView.attrs({
 
   margin-top: ${RFPercentage(20)}px;
 `;
+
+export const Transactions = styled.View`
+  flex: 1;
+  padding: 0 24px;
+  margin-top: ${RFPercentage(12)}px;
+  align-items: flex-start;
+`
+
+export const Title = styled.Text`
+  font-family: ${({theme}) => theme.fonts.medium};
+  font-size: ${RFValue(18)}px;
+
+`
