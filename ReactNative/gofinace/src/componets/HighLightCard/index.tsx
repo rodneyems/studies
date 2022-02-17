@@ -1,5 +1,4 @@
 import React from 'react';
-import theme from '../../global/styles/theme';
 import {
   Container,
   Header,
@@ -11,10 +10,12 @@ import {
 } from './styles';
 
 interface Props {
-  type: 'up' | 'down' | 'total';
-  title: string;
-  amount: string;
-  lastTransaction: string;
+  data: {
+    type: 'up' | 'down' | 'total';
+    title: string;
+    amount: string;
+    lastTransaction: string;
+  }
 }
 const icon = {
   up: 'arrow-up-circle',
@@ -22,17 +23,17 @@ const icon = {
   total: 'dollar-sign',
 };
 
-export function HighLightCard({ type, title, amount, lastTransaction }: Props) {
+export function HighLightCard({ data }: Props) {
   return (
-    <Container type={type}>
+    <Container type={data.type}>
       <Header>
-        <Title type={type}>{title}</Title>
-        <Icon name={icon[type]} type={type} />
+        <Title type={data.type}>{data.title}</Title>
+        <Icon name={icon[data.type]} type={data.type} />
       </Header>
 
       <Footer>
-        <Amount type={type}>{amount}</Amount>
-        <LastTransaction type={type}>{lastTransaction}</LastTransaction>
+        <Amount type={data.type}>{data.amount}</Amount>
+        <LastTransaction type={data.type}>{data.lastTransaction}</LastTransaction>
       </Footer>
     </Container>
   );

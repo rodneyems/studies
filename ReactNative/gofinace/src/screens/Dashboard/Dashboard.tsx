@@ -1,6 +1,6 @@
 import React from 'react';
 import { HighLightCard } from '../../componets/HighLightCard';
-import { Transaction } from '../../componets/Transaction';
+import { TransactionCard } from '../../componets/TransactionCard';
 import {
   Container,
   Header,
@@ -14,9 +14,31 @@ import {
   HighLightCards,
   Transactions,
   Title,
+  TransactionsList,
 } from './styles';
 
 export function Dasboard() {
+  const transactionData = [
+    {
+      amount: 'R$ 100.000,00',
+      categoryName: { name: 'Vendas', icon: 'dollar-sign' },
+      date: '10/11/2021',
+      title: 'Desenvolvimento de APP',
+    },
+    {
+      amount: 'R$ 100.000,00',
+      categoryName: { name: 'Vendas', icon: 'dollar-sign' },
+      date: '10/11/2021',
+      title: 'Desenvolvimento de APP',
+    },
+    {
+      amount: 'R$ 100.000,00',
+      categoryName: { name: 'Vendas', icon: 'dollar-sign' },
+      date: '10/11/2021',
+      title: 'Desenvolvimento de APP',
+    },
+  ];
+
   return (
     <Container>
       <Header>
@@ -33,33 +55,39 @@ export function Dasboard() {
       </Header>
       <HighLightCards>
         <HighLightCard
-          type='up'
-          title='Entrada'
-          amount='R$ 50.000,00'
-          lastTransaction='Última transação realizada dia 15/02/2022'
+          data={{
+            type: 'up',
+            title: 'Entrada',
+            amount: 'R$ 50.000,00',
+            lastTransaction: 'Última transação realizada dia 15/02/2022',
+          }}
         />
         <HighLightCard
-          type='down'
-          title='Saída'
-          amount='R$ 19.000,00'
-          lastTransaction='Última transação realizada dia 15/02/2022'
+          data={{
+            type: 'down',
+            title: 'Saída',
+            amount: 'R$ 50.000,00',
+            lastTransaction: 'Última transação realizada dia 20/02/2022',
+          }}
         />
         <HighLightCard
-          type='total'
-          title='Resumo'
-          amount='R$ 20.000,00'
-          lastTransaction='Última transação realizada dia 15/02/2022'
+          data={{
+            type: 'total',
+            title: 'Resumo',
+            amount: 'R$ 50.000,00',
+            lastTransaction: 'Última transação realizada dia 28/02/2022',
+          }}
         />
       </HighLightCards>
       <Transactions>
         <Title>Listagem</Title>
-
-        <Transaction
-          amount='R$ 20.000,00'
-          categoryName={{ icon: 'dollar-sign', name: 'Vendas' }}
-          date='10/10/10'
-          title='Desenvolvimento do site'
-        ></Transaction>
+        <TransactionsList
+          showsVerticalScrollIndicator={false}
+          data={transactionData}
+          renderItem={({ item }) => (
+            <TransactionCard data={item}></TransactionCard>
+          )}
+        ></TransactionsList>
       </Transactions>
     </Container>
   );

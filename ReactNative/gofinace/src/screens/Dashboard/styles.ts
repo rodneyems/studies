@@ -80,3 +80,7 @@ export const Title = styled.Text`
   font-size: ${RFValue(18)}px;
 
 `
+
+export const TransactionsList = styled.FlatList`
+  width: 100%;
+`;
