@@ -1,6 +1,7 @@
 import styled from 'styled-components/native'
 import { RFPercentage, RFValue } from 'react-native-responsive-fontsize'
 import { Feather } from '@expo/vector-icons';
+import { FlatList } from 'react-native';
 
 
 export const Container = styled.View`
@@ -80,7 +81,6 @@ export const Title = styled.Text`
   font-size: ${RFValue(18)}px;
 
 `
-
 export const TransactionsList = styled.FlatList`
   width: 100%;
-`;
+` as unknown as typeof FlatList;

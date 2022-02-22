@@ -1,6 +1,10 @@
 import React from 'react';
+import { FlatList } from 'react-native';
 import { HighLightCard } from '../../componets/HighLightCard';
-import { TransactionCard } from '../../componets/TransactionCard';
+import {
+  TransactionCard,
+  TransactionProps,
+} from '../../componets/TransactionCard';
 import {
   Container,
   Header,
@@ -17,25 +21,35 @@ import {
   TransactionsList,
 } from './styles';
 
+export interface DataListProps extends TransactionProps {
+  id: string;
+}
+
 export function Dasboard() {
-  const transactionData = [
+  const data: DataListProps[] = [
     {
+      id: '1',
+      type: 'positive',
+      title: 'Desenvolvimento de APP',
       amount: 'R$ 100.000,00',
       categoryName: { name: 'Vendas', icon: 'dollar-sign' },
       date: '10/11/2021',
-      title: 'Desenvolvimento de APP',
     },
     {
-      amount: 'R$ 100.000,00',
+      id: '2',
+      type: 'positive',
+      title: 'Desenvolvimento de APP',
+      amount: 'R$ 2.000,00',
       categoryName: { name: 'Vendas', icon: 'dollar-sign' },
       date: '10/11/2021',
-      title: 'Desenvolvimento de APP',
     },
     {
-      amount: 'R$ 100.000,00',
+      id: '3',
+      type: 'negative',
+      title: 'Desenvolvimento de APP',
+      amount: 'R$ 13.000,00',
       categoryName: { name: 'Vendas', icon: 'dollar-sign' },
       date: '10/11/2021',
-      title: 'Desenvolvimento de APP',
     },
   ];
 
@@ -81,13 +95,9 @@ export function Dasboard() {
       </HighLightCards>
       <Transactions>
         <Title>Listagem</Title>
-        <TransactionsList
-          showsVerticalScrollIndicator={false}
-          data={transactionData}
-          renderItem={({ item }) => (
+        <TransactionsList data={data} renderItem={({ item  }) => (
             <TransactionCard data={item}></TransactionCard>
-          )}
-        ></TransactionsList>
+          )}/>
       </Transactions>
     </Container>
   );
