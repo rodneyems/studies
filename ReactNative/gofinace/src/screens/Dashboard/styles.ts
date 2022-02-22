@@ -81,6 +81,8 @@ export const Title = styled.Text`
   font-size: ${RFValue(18)}px;
 
 `
-export const TransactionsList = styled.FlatList`
+export const TransactionsList = styled.FlatList.attrs({
+  showsVerticalScrollIndicator: false,
+})`
   width: 100%;
 ` as unknown as typeof FlatList;
