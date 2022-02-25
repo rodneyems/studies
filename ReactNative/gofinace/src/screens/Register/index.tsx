@@ -1,18 +1,31 @@
-import React from "react";
-import { Button } from "../../componets/Form/Button";
-import { CategorySelect } from "../../componets/Form/CategorySelect";
-import { Input } from "../../componets/Form/Input";
-import { TransactionTypeButton } from "../../componets/Form/TransactionTypeButton";
-import { 
-  Container, 
+import React, { useState } from 'react';
+import { Modal } from 'react-native';
+import { Button } from '../../componets/Form/Button';
+import { CategorySelectButton } from '../../componets/Form/CategorySelectButton';
+import { Input } from '../../componets/Form/Input';
+import { TransactionTypeButton } from '../../componets/Form/TransactionTypeButton';
+import { CategorySelect } from '../CategorySelect';
+import {
+  Container,
   Header,
   Title,
   Form,
   Fields,
   TransactionsTypes,
-} from "./styles";
+} from './styles';
 
-export function Register(){
+export function Register() {
+  const [categoryModalOpen, setCategoryModalOpen] = useState(false);
+  const [category, setCategory] = useState({
+    key: 'category',
+    name: 'Categoria',
+  });
+  function handleOpenSelectCategoryModal(){
+    setCategoryModalOpen(true)
+  }
+  function handleCloseSelectCategoryModal(){
+    setCategoryModalOpen(false)
+  }
   return (
     <Container>
       <Header>
@@ -20,17 +33,25 @@ export function Register(){
       </Header>
       <Form>
         <Fields>
-          <Input placeholder="Nome"/>
-          <Input placeholder="Preço"/>
+          <Input placeholder='Nome' />
+          <Input placeholder='Preço' />
           <TransactionsTypes>
-            <TransactionTypeButton type="up" title="Income"/>
-            <TransactionTypeButton type="down" title="Outcome"/>
+            <TransactionTypeButton type='up' title='Income' />
+            <TransactionTypeButton type='down' title='Outcome' />
           </TransactionsTypes>
-            <CategorySelect title={"Categoria"}></CategorySelect>
+          <CategorySelectButton title={'Categoria'} onPress={handleOpenSelectCategoryModal}></CategorySelectButton>
         </Fields>
 
-        <Button title="Confirmar"></Button>
+        <Button title='Confirmar'></Button>
       </Form>
+
+      <Modal visible={categoryModalOpen}>
+        <CategorySelect 
+          category={category}
+          closeSelectCategory={handleCloseSelectCategoryModal}
+          setCategory={ setCategory }
+        ></CategorySelect>
+      </Modal>
     </Container>
-  ); 
+  );
 }
