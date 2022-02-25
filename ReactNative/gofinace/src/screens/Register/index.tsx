@@ -15,16 +15,20 @@ import {
 } from './styles';
 
 export function Register() {
+  const [transactionsType, setTransactionsType] = useState('');
   const [categoryModalOpen, setCategoryModalOpen] = useState(false);
   const [category, setCategory] = useState({
     key: 'category',
     name: 'Categoria',
   });
-  function handleOpenSelectCategoryModal(){
-    setCategoryModalOpen(true)
+  function handleTransactionsType(transactionType: 'up' | 'down') {
+    setTransactionsType(transactionType);
   }
-  function handleCloseSelectCategoryModal(){
-    setCategoryModalOpen(false)
+  function handleOpenSelectCategoryModal() {
+    setCategoryModalOpen(true);
+  }
+  function handleCloseSelectCategoryModal() {
+    setCategoryModalOpen(false);
   }
   return (
     <Container>
@@ -36,20 +40,23 @@ export function Register() {
           <Input placeholder='Nome' />
           <Input placeholder='Preço' />
           <TransactionsTypes>
-            <TransactionTypeButton type='up' title='Income' />
-            <TransactionTypeButton type='down' title='Outcome' />
+            <TransactionTypeButton type='up' title='Income' isActive={transactionsType === 'up' ? true : false} onPress={() => handleTransactionsType('up') }/>
+            <TransactionTypeButton type='down' title='Outcome' isActive={transactionsType === 'down' ? true : false} onPress={() => handleTransactionsType('down') }/>
           </TransactionsTypes>
-          <CategorySelectButton title={'Categoria'} onPress={handleOpenSelectCategoryModal}></CategorySelectButton>
+          <CategorySelectButton
+            title={category.name}
+            onPress={handleOpenSelectCategoryModal}
+          ></CategorySelectButton>
         </Fields>
 
         <Button title='Confirmar'></Button>
       </Form>
 
       <Modal visible={categoryModalOpen}>
-        <CategorySelect 
+        <CategorySelect
           category={category}
           closeSelectCategory={handleCloseSelectCategoryModal}
-          setCategory={ setCategory }
+          setCategory={setCategory}
         ></CategorySelect>
       </Modal>
     </Container>
