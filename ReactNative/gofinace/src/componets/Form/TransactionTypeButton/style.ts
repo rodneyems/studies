@@ -14,8 +14,8 @@ export const Container = styled(TouchableOpacity)<ContainerProps>`
   border: 1.5px solid ${({theme})=> theme.colors.text};
   border-radius: 5px;
   padding: ${RFValue(16)}px ${RFValue(36)}px;
-  ${({isActive, type}) => isActive && type === 'up' ? css`background-color: ${({theme})=> theme.colors.sucess_light}` : css`${({theme})=> theme.colors.background}` };
-  ${({isActive, type}) => isActive && type === 'down' ? css`background-color: ${({theme})=> theme.colors.attention_light}` : css`${({theme})=> theme.colors.background}` };
+  ${({isActive, type}) => isActive && type === 'positive' ? css`background-color: ${({theme})=> theme.colors.sucess_light}` : css`${({theme})=> theme.colors.background}` };
+  ${({isActive, type}) => isActive && type === 'negative' ? css`background-color: ${({theme})=> theme.colors.attention_light}` : css`${({theme})=> theme.colors.background}` };
 `
 export const Icon = styled(Feather)`
   font-size: ${RFValue(24)}px;
