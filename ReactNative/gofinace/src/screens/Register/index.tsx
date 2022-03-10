@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import uuid from 'react-native-uuid';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
 import { Modal, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
 import { Button } from '../../componets/Form/Button';
@@ -31,8 +32,9 @@ interface FormData {
   name: string;
   amount: Number;
 }
-const dataKey = 'gofinace:transactions';
+const dataKey = '@gofinace:transactions';
 export function Register() {
+  const navigation = useNavigation<NavigationProp<any>>();
   const [transactionsType, setTransactionsType] = useState('');
   const [categoryModalOpen, setCategoryModalOpen] = useState(false);
   const [category, setCategory] = useState({
@@ -68,7 +70,7 @@ export function Register() {
       name: form.name,
       amount: form.amount,
       transactionsType,
-      category: category.key,
+      categoryName: category.key,
       date: new Date(),
     };
     try {
@@ -84,6 +86,7 @@ export function Register() {
         name: 'Categoria',
       });
       reset();
+      navigation.navigate('Listagem')
     } catch (error) {
       console.log(error);
       Alert.alert('Não foi possível salvar os dados');
