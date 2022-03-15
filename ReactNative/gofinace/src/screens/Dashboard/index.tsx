@@ -35,7 +35,7 @@ export interface DataListProps extends TransactionProps {
 interface HighLightCardData {
   entries: { amount: string, lastTransaction: string; };
   expensives: { amount: string, lastTransaction: string };
-  total: { amount: string; };
+  total: { amount: string, lastTransaction: string };
 }
 
 export function Dashboard() {
@@ -51,19 +51,14 @@ export function Dashboard() {
     collection: DataListProps[],
     type: 'positive' | 'negative'
   ) {
-    const lastTransaction = Math.max.apply(
+    const lastTransaction = new Date(Math.max.apply(
       Math,
       collection
         .filter((transaction) => transaction.type === type)
         .map((transaction) => new Date(transaction.date).getTime())
-    );
-    const lastTransactionFormatted = Intl.DateTimeFormat('pt-BR', {
-      day: '2-digit',
-      month: '2-digit',
-      year: '2-digit',
-    }).format(new Date(lastTransaction));
+    ));
 
-    return lastTransactionFormatted;
+    return `${lastTransaction.getDate()} de ${lastTransaction.toLocaleString('pt-BR', {month: 'long'})}`;
   }
   async function loadTransactions() {
     let entriesSum = 0;
@@ -90,7 +85,7 @@ export function Dashboard() {
 
         return {
           id: item.id,
-          title: item.name,
+          name: item.name,
           amount,
           type: item.type,
           categoryName: item.categoryName,
@@ -122,6 +117,7 @@ export function Dashboard() {
           style: 'currency',
           currency: 'BRL',
         }),
+        lastTransaction: lastTransactionEntries >= lastTransactionExpensives ? lastTransactionEntries : lastTransactionExpensives
       },
     });
     setIsLoading(false);
@@ -181,7 +177,7 @@ export function Dashboard() {
                 type: 'total',
                 title: 'Resumo',
                 amount: highLightCard.total.amount,
-                lastTransaction: 'Última transação realizada dia 28/02/2022',
+                lastTransaction: 'De 01 à ' + highLightCard.total.lastTransaction,
               }}
             />
           </HighLightCards>
