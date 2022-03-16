@@ -29,7 +29,9 @@ export const CategoriesList = styled.FlatList.attrs({
   width: 100%;
 ` as unknown as typeof FlatList;
 
-export const GraficContainer = styled.View`
-  height: 350px;
+export const ChartContainer = styled.View`
+  height: 300px;
   width: 100%;
+  justify-content: center;
+  align-items: center;
 `;
