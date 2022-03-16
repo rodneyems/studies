@@ -1,3 +1,4 @@
+import { FlatList } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
 
@@ -19,4 +20,16 @@ export const Title = styled.Text`
   font-family: ${({ theme }) => theme.fonts.regular};
   color: ${({ theme }) => theme.colors.shape};
   font-size: ${RFValue(18)}px;
+`;
+
+export const CategoriesList = styled.FlatList.attrs({
+  showsVerticalScrollIndicator: false,
+})`
+  padding: 15px;
+  width: 100%;
+` as unknown as typeof FlatList;
+
+export const GraficContainer = styled.View`
+  height: 350px;
+  width: 100%;
 `;
