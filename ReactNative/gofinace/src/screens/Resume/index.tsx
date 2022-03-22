@@ -2,10 +2,22 @@ import React, { useCallback, useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { HistoryCard } from '../../componets/HistoryCard';
 import { TransactionProps } from '../../componets/TransactionCard';
-import { Container, Title, Header, CategoriesList, ChartContainer } from './styles';
+import {
+  Container,
+  Title,
+  Header,
+  CategoriesList,
+  ChartContainer,
+  MonthSelect,
+  MonthSelectButton,
+  MonthSelectIcon,
+  Month
+} from './styles';
 import { categories } from '../../global/utils/categories';
 import { useFocusEffect } from '@react-navigation/native';
 import { VictoryPie } from 'victory-native';
+import { addMonths, subMonths, format } from 'date-fns';
+import { ptBR } from 'date-fns/locale'
 
 interface CategoryProps {
   name: string;
@@ -13,11 +25,23 @@ interface CategoryProps {
   key: string;
   color: string;
   percent: number;
-  percentString: string
+  percentString: string;
 }
 
 export function Resume() {
   const [totalByCategory, setTotalByCategory] = useState<CategoryProps[]>([]);
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
+  function handleDate(action: 'next' | 'prev'){
+    if (action === 'next'){
+      const newDate = addMonths(selectedDate, 1);
+      setSelectedDate(newDate);
+    } else {
+      const newDate = subMonths(selectedDate, 1);
+      setSelectedDate(newDate);
+    }
+  }
+
   async function loadData() {
     const dataKey = '@gofinace:transactions';
     const response = await AsyncStorage.getItem(dataKey);
@@ -26,11 +50,17 @@ export function Resume() {
       : [];
 
     const expensives = transactions.filter(
-      (expensive) => expensive.type === 'negative'
+      (expensive) => 
+        expensive.type === 'negative' &&
+        new Date(expensive.date).getMonth() === selectedDate.getMonth() &&
+        new Date(expensive.date).getFullYear() === selectedDate.getFullYear()
     );
-    const expensivesTotal = expensives.reduce((total: number, item: TransactionProps) => {
-      return total + Number(item.amount)
-    }, 0)
+    const expensivesTotal = expensives.reduce(
+      (total: number, item: TransactionProps) => {
+        return total + Number(item.amount);
+      },
+      0
+    );
     const totalByCategoryList: CategoryProps[] = [];
     categories.forEach((category) => {
       let categorySum = 0;
@@ -40,7 +70,9 @@ export function Resume() {
           categorySum += Number(expensive.amount);
         }
       });
-      const percentCategory = Number((categorySum / expensivesTotal * 100).toFixed(0))
+      const percentCategory = Number(
+        ((categorySum / expensivesTotal) * 100).toFixed(0)
+      );
       if (categorySum > 0) {
         totalByCategoryList.push({
           name: category.name,
@@ -51,31 +83,37 @@ export function Resume() {
           key: category.key,
           color: category.color,
           percent: percentCategory,
-          percentString: percentCategory + '%'
+          percentString: percentCategory + '%',
         });
       }
     });
     setTotalByCategory(totalByCategoryList);
   }
-  useEffect(() => {
-    loadData();
-  }, []);
   useFocusEffect(
     useCallback(() => {
       loadData();
-    }, [])
+    }, [selectedDate])
   );
   return (
     <Container>
       <Header>
         <Title>Resumo</Title>
       </Header>
+      <MonthSelect>
+        <MonthSelectButton onPress={()=>handleDate('prev')}>
+          <MonthSelectIcon name="chevron-left" />
+        </MonthSelectButton>
+        <Month> {format(selectedDate, 'MMMM, yyyy', {locale: ptBR})} </Month>
+        <MonthSelectButton onPress={()=>handleDate('next')}>
+          <MonthSelectIcon name="chevron-right" />
+        </MonthSelectButton>
+      </MonthSelect>
       <ChartContainer>
-        <VictoryPie 
+        <VictoryPie
           data={totalByCategory}
           x='percentString'
           y='percent'
-          colorScale={totalByCategory.map(category => category.color)}
+          colorScale={totalByCategory.map((category) => category.color)}
           width={300}
         />
       </ChartContainer>

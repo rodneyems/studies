@@ -1,6 +1,8 @@
 import { FlatList } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
+import { Feather } from '@expo/vector-icons';
+import { BorderlessButton } from 'react-native-gesture-handler';
 
 export const Container = styled.View`
   flex: 1;
@@ -34,4 +36,21 @@ export const ChartContainer = styled.View`
   width: 100%;
   justify-content: center;
   align-items: center;
+`;
+
+export const MonthSelect = styled.View`
+  padding: 15px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+export const MonthSelectButton = styled.TouchableOpacity`
+`;
+export const MonthSelectIcon = styled(Feather)`
+  font-size: ${RFValue(24)}px;
+`;
+export const Month = styled.Text`
+  font-family: ${({theme})=>theme.fonts.regular};
+  font-size: ${RFValue(20)}px;
+
 `;
