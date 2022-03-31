@@ -1,13 +1,14 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"os"
 	"reflect"
+	"strings"
 	"time"
-	"bufio"
 )
 
 const monitoramentos = 3
@@ -58,7 +59,7 @@ func exibeMenu() int {
 
 func iniciarMonitoramento() {
 	fmt.Println("Monitorando...")
-	sites := []string{}
+	sites := leSitesDoArquivo()
 	for i := 0; i < monitoramentos; i++ {
 		for _, site := range sites {
 			fmt.Println(site)
@@ -72,6 +73,7 @@ func testaSite(site string) {
 	res, err := http.Get(site)
 	if err != nil {
 		fmt.Println("Ocorreu um erro na requisição do site:", site)
+		return
 	}
 	if res.StatusCode == 200 {
 		fmt.Println("Site:", site, "Foi carregado com sucesso")
@@ -80,11 +82,23 @@ func testaSite(site string) {
 	}
 }
 
-func leSitesDoArquivo() {
-	arquivo, err := ioutil.ReadFile("sites.txt")
+func leSitesDoArquivo() []string {
+	var sites []string
+	arquivo, err := os.Open("sites.txt")
 	if err != nil {
 		fmt.Println("Ocorreu um erro de", err)
 	}
-	fmt.Println(string(arquivo))
-	
+	leitor := bufio.NewReader(arquivo)
+	for {
+		linha, err := leitor.ReadString('\n')
+		linha = strings.TrimSpace(linha)
+		sites = append(sites, linha)
+		if err == io.EOF {
+			break
+		} else if err != nil {
+			fmt.Println("Ocorreu um erro de", err)
+		}
+	}
+	arquivo.Close()
+	return sites
 }
