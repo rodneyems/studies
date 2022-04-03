@@ -1,0 +1,10 @@
+
+30/03/2022 21:52:38 - https://random-status-code.herokuapp.com esta false
+30/03/2022 21:52:39 - https://google.com.br esta true
+30/03/2022 21:52:39 - https://google.com esta true
+30/03/2022 21:52:43 - https://random-status-code.herokuapp.com esta true
+30/03/2022 21:52:43 - https://google.com.br esta true
+30/03/2022 21:52:43 - https://google.com esta true
+30/03/2022 21:52:46 - https://random-status-code.herokuapp.com esta false
+30/03/2022 21:52:47 - https://google.com.br esta true
+30/03/2022 21:52:47 - https://google.com esta true
