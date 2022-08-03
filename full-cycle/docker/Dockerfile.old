@@ -1,11 +1,18 @@
 FROM nginx:latest
 
+ENV NGINX_VERSION_TESTE   %%NGINX_VERSION%%
+
 RUN apt-get update && \
     apt-get install vim -y
 
 COPY ./html/ /usr/share/nginx/html/
 WORKDIR /app/
 
+USER daemon
+
+ENTRYPOINT [ "echo", "Hello" ]
+
+CMD [ "World" ]
 # docker run rodney-nginx > Hello World
 # docker run rodney-nginx Rodney > Hello Rodney
 
