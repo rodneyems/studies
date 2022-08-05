@@ -1,0 +1,20 @@
+FROM node AS dev
+WORKDIR /usr/src/app
+
+COPY . .
+
+EXPOSE 3000
+
+CMD ["node", "index.js"]
+
+FROM node:slim
+
+WORKDIR /usr/src/app
+
+COPY --from=dev /usr/src/app .
+
+RUN chown -R www-data:www-data /usr/src/app
+
+EXPOSE 3000
+
+CMD ["node", "index.js"]
