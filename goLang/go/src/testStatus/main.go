@@ -13,11 +13,8 @@ const (
 	DebtPaidStatus              = "paid"
 )
 
-// Debt status transition logic
 type transitionValidator func(string, string) bool
 
-// DebtStatusValidations map represents the valid state callbacks to approve transitions based on some business logic.
-// the key is the next state for the debt and the value is callback to invoke.
 var DebtStatusValidations = map[string]transitionValidator{
 	DebtPausedStatus: func(previousState, nextState string) bool {
 		return true
@@ -76,8 +73,6 @@ func IsValidStatus(status string) bool {
 	return false
 }
 
-// IsValidStateTransition checks if it's possible to move some registered debt
-// from the current state to a desired one.
 func IsValidStateTransition(current, desired string) bool {
 	valid := DebtStatesTransitions[current]
 
@@ -90,7 +85,6 @@ func IsValidStateTransition(current, desired string) bool {
 	return false
 }
 
-// IsFinalStatus returns true if this state is and end state
 func IsFinalStatus(status string) bool {
 	return len(DebtStatesTransitions[status]) == 0
 }
