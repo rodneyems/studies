@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:5.7
+    command: --innodb-use-native-aio=0
+    container_name: db
+    restart: always
+    tty: true
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=nodeDB
+      - MYSQL_ROOT_PASSWORD=root
+      # - MYSQL_USER=root já é criada por padrão nessa versão do Mysql
+    networks:
+      - nodenet2
+  node-rod:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: rodneymartins/nome-da-imagem
+    container_name: hello-node
+    tty: true
+    volumes:
+      - ./:/usr/src/app
+    networks:
+      - nodenet2
+    ports:
+      - "2000:2000"
+networks:
+  nodenet2:
+    driver: bridge
