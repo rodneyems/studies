@@ -1,4 +1,4 @@
-package adapters
+package db
 
 import (
 	"arquitetura-hexagonal/application"
@@ -8,6 +8,12 @@ import (
 
 type ProductDB struct {
 	db *sql.DB
+}
+
+func NewProductDB(db *sql.DB) *ProductDB {
+	return &ProductDB{
+		db: db,
+	}
 }
 
 func (p *ProductDB) Get(id string) (application.ProductInterface, error) {
